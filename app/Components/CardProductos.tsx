@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, Button, StyleSheet } from 'react-native';
+import { Dimensions, View, Text, Image, Button, StyleSheet } from 'react-native';
 
 export interface Product {
   image: string;
@@ -11,9 +11,12 @@ interface CardProps {
   product: Product;
 }
 
+const screenWidth = Dimensions.get('window').width;
+const isMobile = screenWidth < 768;
+
 const CardProduc: React.FC<CardProps> = ({ product }) => {
   return (
-    <View style={styles.card}>
+    <View style={[styles.card, isMobile && { width: '100%' }]}>
       <Image source={{ uri: product.image }} style={styles.cardImgTop} />
       <View style={styles.cardBody}>
         <Text style={styles.cardTitle}>{product.title}</Text>
